@@ -71,6 +71,7 @@ defmodule Ecto.ULID do
   into a binary ULID.
   """
   def dump(encoded)
+  def dump(<<_::bytes-size(36)>> = uuid), do: Ecto.UUID.dump(uuid)
   def dump(<<_::bytes-size(26)>> = encoded), do: decode(encoded)
   def dump(<<_::bytes-size(22)>> = encoded), do: decode64(encoded)
   def dump(<<_::bytes-size(20)>> = encoded), do: decode64(encoded)
